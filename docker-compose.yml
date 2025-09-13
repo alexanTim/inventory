@@ -1,0 +1,69 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gentle_walker_app
+    volumes:
+      - .:/var/www/html
+      - ./storage:/var/www/html/storage
+    depends_on:
+      - db
+      - redis
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    env_file:
+      - .env.docker
+    networks:
+      - gentle_walker_network
+    ports:
+      - "8080:8080"
+
+  web:
+    image: nginx:alpine
+    container_name: gentle_walker_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - gentle_walker_network
+
+  db:
+    image: mysql:8.0
+    container_name: gentle_walker_mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gentle_walker
+      MYSQL_USER: gentle_walker
+      MYSQL_PASSWORD: gentle_walker
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    command: --default-authentication-plugin=caching_sha2_password
+    networks:
+      - gentle_walker_network
+
+  redis:
+    image: redis:alpine
+    container_name: gentle_walker_redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - gentle_walker_network
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  gentle_walker_network:
+    driver: bridge

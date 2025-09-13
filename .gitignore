@@ -1,0 +1,65 @@
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/storage/debugbar
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/testing
+/storage/framework/views
+/vendor
+.env
+.env.*
+!.env.example
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/auth.json
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+/.claude
+db_schema/
+
+# Log files
+*.log
+server.log
+network-server.log
+
+# Temporary files
+*.tmp
+*.temp
+/t-forward
+/neline*
+/nly
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentation files that shouldn't be tracked
+*_REPORT.md
+*_DOCUMENTATION.md
+*_GUIDE.md
+*_SUMMARY.md
+!README.md
+
+# Backup files
+*.backup
+*.bak
+*~
+node_modules
