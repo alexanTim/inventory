@@ -5,6 +5,9 @@
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
-
+*.js linguist-detectable=false
+*.css linguist-detectable=false
+*.vue linguist-detectable=false
+*.php linguist-detectable=true
 CHANGELOG.md export-ignore
 README.md export-ignore
